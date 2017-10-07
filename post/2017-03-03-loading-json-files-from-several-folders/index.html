@@ -56,7 +56,7 @@
 
   
 
-  <title>Loading JSON files from several folders | Isaac Freitas</title>
+  <title> | Isaac Freitas</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
@@ -157,15 +157,15 @@
 
 
   <div class="article-container">
-    <h1 itemprop="name">Loading JSON files from several folders</h1>
+    <h1 itemprop="name"></h1>
     
 
 <div class="article-metadata">
 
   <span class="article-date">
     
-    <time datetime="2017-03-03 21:07:54 -0600 CST" itemprop="datePublished">
-      Mar 3, 2017
+    <time datetime="0001-01-01 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+      Jan 1, 0001
     </time>
   </span>
 
@@ -186,28 +186,28 @@
     </li>
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Loading%20JSON%20files%20from%20several%20folders&amp;url=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f"
+         href="https://twitter.com/intent/tweet?text=&amp;url=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f"
          target="_blank">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f&amp;title=Loading%20JSON%20files%20from%20several%20folders"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f&amp;title="
          target="_blank">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f&amp;title=Loading%20JSON%20files%20from%20several%20folders"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f&amp;title="
          target="_blank">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Loading%20JSON%20files%20from%20several%20folders&amp;body=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f">
+         href="mailto:?subject=&amp;body=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -220,7 +220,13 @@
 </div>
 
     <div class="article-style" itemprop="articleBody">
-      <p>For my dissertation research, I used the <a href="https://github.com/DocNow/twarc" target="_blank">twarc</a> command line and python package to collect tweets related to the flooding in Louisiana during August of 2016.  A useful utility which comes with this project is twarc-archive.py which allows passing keywords in which are then used to download all tweets (within the API limits) which mention those words.  Each time twarc-archive.py is run, it keeps a running log file of the progress and status of tweets being collected and creates a new .json file.
+      <p>&ndash;
+title: &ldquo;Loading JSON files from several folders&rdquo;
+author: &ldquo;Isaac Freitas&rdquo;</p>
+
+<h2 id="date-2017-03-03t21-07-54-06-00">date: &ldquo;2017-03-03T21:07:54-06:00&rdquo;</h2>
+
+<p>For my dissertation research, I used the <a href="https://github.com/DocNow/twarc" target="_blank">twarc</a> command line and python package to collect tweets related to the flooding in Louisiana during August of 2016.  A useful utility which comes with this project is twarc-archive.py which allows passing keywords in which are then used to download all tweets (within the API limits) which mention those words.  Each time twarc-archive.py is run, it keeps a running log file of the progress and status of tweets being collected and creates a new .json file.
 </p>
 
 <p>For my data collection, I ran the program every day for four months for several different searches.  This resulted in multiple folders (one for every search) and dozens of json files in each folder.  Long story short, to do any further analysis I had to learn how to load all that json data into a usable format.  I found inspiration from a few stackoverflow posts such as <a href="http://stackoverflow.com/questions/38511163/parsing-multiple-json-files" target="_blank">this</a> and <a href="http://stackoverflow.com/questions/21533894/how-to-read-line-delimited-json-from-large-file-line-by-line" target="_blank">this</a> and <a href="http://stackoverflow.com/questions/1744989/read-from-file-or-stdin" target="_blank">this</a>, but ended up making an amalgamation with the best parts of each.</p>
@@ -263,8 +269,8 @@ for file in alljsonfiles:
     for file in alljsonfiles:
         for line in fileinput.input(file):
             tweet = json.loads(line)
-            d_lst.append(j2c.get_row(tweet))
-    return d_lst
+            empty_lst.append(j2c.get_row(tweet))
+    return empty_lst
 </code></pre>
 
 <p>If you like the walkthrough, send me a tweet about it.  See the links at the bottom of the page.</p>
@@ -280,10 +286,10 @@ for file in alljsonfiles:
   <nav>
   <ul class="pager">
     
-    <li class="previous"><a href="https://irfreitas.github.io/post/2017-03-03-foundations/"><span
-      aria-hidden="true">&larr;</span> Foundations</a></li>
-    
 
+    
+    <li class="next"><a href="https://irfreitas.github.io/post/2017-03-03-foundations/">Foundations <span
+      aria-hidden="true">&rarr;</span></a></li>
     
   </ul>
 </nav>

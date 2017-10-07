@@ -11,6 +11,15 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Topic Modeling</title>
+      <link>https://irfreitas.github.io/post/topic-modeling/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://irfreitas.github.io/post/topic-modeling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Tweet Relief: How Voluntary Organizations Active in Disaster Communicate about Disaster Relief on Twitter</title>
       <link>https://irfreitas.github.io/talk/media-preconf-2017/</link>
       <pubDate>Fri, 11 Aug 2017 00:00:00 +0000</pubDate>
@@ -29,12 +38,41 @@
     </item>
     
     <item>
-      <title>Loading JSON files from several folders</title>
+      <title>Foundations</title>
+      <link>https://irfreitas.github.io/post/2017-03-03-foundations/</link>
+      <pubDate>Fri, 03 Mar 2017 19:52:49 -0600</pubDate>
+      
+      <guid>https://irfreitas.github.io/post/2017-03-03-foundations/</guid>
+      <description>&lt;p&gt;Welcome to my blog. I hope to use this space to discuss social science research and to share what I learn about programming in R, Python, SQL, and other languages relevant to data science and computational social science methods.  I can&amp;rsquo;t promise any deep wisdom, but hopefully I offer snippets of useful knowledge as I go along.&lt;/p&gt;
+
+&lt;p&gt;Cheers,
+Isaac&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://irfreitas.github.io/about/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>https://irfreitas.github.io/about/</guid>
+      <description>&lt;p&gt;Welcome to the website of Isaac Freitas.  Please contact me as necessary.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://irfreitas.github.io/post/2017-03-03-loading-json-files-from-several-folders/</link>
-      <pubDate>Fri, 03 Mar 2017 21:07:54 -0600</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://irfreitas.github.io/post/2017-03-03-loading-json-files-from-several-folders/</guid>
-      <description>&lt;p&gt;For my dissertation research, I used the &lt;a href=&#34;https://github.com/DocNow/twarc&#34; target=&#34;_blank&#34;&gt;twarc&lt;/a&gt; command line and python package to collect tweets related to the flooding in Louisiana during August of 2016.  A useful utility which comes with this project is twarc-archive.py which allows passing keywords in which are then used to download all tweets (within the API limits) which mention those words.  Each time twarc-archive.py is run, it keeps a running log file of the progress and status of tweets being collected and creates a new .json file.
+      <description>&lt;p&gt;&amp;ndash;
+title: &amp;ldquo;Loading JSON files from several folders&amp;rdquo;
+author: &amp;ldquo;Isaac Freitas&amp;rdquo;&lt;/p&gt;
+
+&lt;h2 id=&#34;date-2017-03-03t21-07-54-06-00&#34;&gt;date: &amp;ldquo;2017-03-03T21:07:54-06:00&amp;rdquo;&lt;/h2&gt;
+
+&lt;p&gt;For my dissertation research, I used the &lt;a href=&#34;https://github.com/DocNow/twarc&#34; target=&#34;_blank&#34;&gt;twarc&lt;/a&gt; command line and python package to collect tweets related to the flooding in Louisiana during August of 2016.  A useful utility which comes with this project is twarc-archive.py which allows passing keywords in which are then used to download all tweets (within the API limits) which mention those words.  Each time twarc-archive.py is run, it keeps a running log file of the progress and status of tweets being collected and creates a new .json file.
 &lt;/p&gt;
 
 &lt;p&gt;For my data collection, I ran the program every day for four months for several different searches.  This resulted in multiple folders (one for every search) and dozens of json files in each folder.  Long story short, to do any further analysis I had to learn how to load all that json data into a usable format.  I found inspiration from a few stackoverflow posts such as &lt;a href=&#34;http://stackoverflow.com/questions/38511163/parsing-multiple-json-files&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; and &lt;a href=&#34;http://stackoverflow.com/questions/21533894/how-to-read-line-delimited-json-from-large-file-line-by-line&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; and &lt;a href=&#34;http://stackoverflow.com/questions/1744989/read-from-file-or-stdin&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt;, but ended up making an amalgamation with the best parts of each.&lt;/p&gt;
@@ -77,34 +115,11 @@ for file in alljsonfiles:
     for file in alljsonfiles:
         for line in fileinput.input(file):
             tweet = json.loads(line)
-            d_lst.append(j2c.get_row(tweet))
-    return d_lst
+            empty_lst.append(j2c.get_row(tweet))
+    return empty_lst
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If you like the walkthrough, send me a tweet about it.  See the links at the bottom of the page.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Foundations</title>
-      <link>https://irfreitas.github.io/post/2017-03-03-foundations/</link>
-      <pubDate>Fri, 03 Mar 2017 19:52:49 -0600</pubDate>
-      
-      <guid>https://irfreitas.github.io/post/2017-03-03-foundations/</guid>
-      <description>&lt;p&gt;Welcome to my blog. I hope to use this space to discuss social science research and to share what I learn about programming in R, Python, SQL, and other languages relevant to data science and computational social science methods.  I can&amp;rsquo;t promise any deep wisdom, but hopefully I offer snippets of useful knowledge as I go along.&lt;/p&gt;
-
-&lt;p&gt;Cheers,
-Isaac&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://irfreitas.github.io/about/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>https://irfreitas.github.io/about/</guid>
-      <description>&lt;p&gt;Welcome to the website of Isaac Freitas.  Please contact me as necessary.&lt;/p&gt;
-</description>
     </item>
     
   </channel>

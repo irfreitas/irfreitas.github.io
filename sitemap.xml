@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>https://irfreitas.github.io/post/topic-modeling/</loc>
+      <lastmod>2017-10-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://irfreitas.github.io/talk/media-preconf-2017/</loc>
       <lastmod>2017-08-11T00:00:00+00:00</lastmod>
     </url>
@@ -16,15 +25,6 @@
     
       <loc>https://irfreitas.github.io/publication/permeable-participation/</loc>
       <lastmod>2017-06-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://irfreitas.github.io/post/2017-03-03-loading-json-files-from-several-folders/</loc>
-      <lastmod>2017-03-03T21:07:54-06:00</lastmod>
     </url>
     
   
@@ -79,6 +79,14 @@
     
       <loc>https://irfreitas.github.io/about/</loc>
       <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://irfreitas.github.io/post/2017-03-03-loading-json-files-from-several-folders/</loc>
     </url>
     
   
