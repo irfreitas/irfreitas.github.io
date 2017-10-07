@@ -46,17 +46,17 @@
     
   
 
-  <link rel="alternate" href="https://irfreitas.github.io/index.xml" type="application/rss+xml" title="Isaac Freitas">
-  <link rel="feed" href="https://irfreitas.github.io/index.xml" type="application/rss+xml" title="Isaac Freitas">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Isaac Freitas">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Isaac Freitas">
 
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/apple-touch-icon.png">
 
-  <link rel="canonical" href="https://irfreitas.github.io/post/2017-03-03-loading-json-files-from-several-folders/">
+  <link rel="canonical" href="/post/2017-03-03-loading-json-files-from-several-folders/">
 
   
 
-  <title> | Isaac Freitas</title>
+  <title>Loading JSON files from several folders | Isaac Freitas</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
@@ -157,15 +157,15 @@
 
 
   <div class="article-container">
-    <h1 itemprop="name"></h1>
+    <h1 itemprop="name">Loading JSON files from several folders</h1>
     
 
 <div class="article-metadata">
 
   <span class="article-date">
     
-    <time datetime="0001-01-01 00:00:00 &#43;0000 UTC" itemprop="datePublished">
-      Jan 1, 0001
+    <time datetime="2017-03-03 21:07:54 -0600 CST" itemprop="datePublished">
+      Mar 3, 2017
     </time>
   </span>
 
@@ -179,35 +179,35 @@
   <ul class="share">
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f"
          target="_blank">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=&amp;url=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f"
+         href="https://twitter.com/intent/tweet?text=Loading%20JSON%20files%20from%20several%20folders&amp;url=%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f"
          target="_blank">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f&amp;title="
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f&amp;title=Loading%20JSON%20files%20from%20several%20folders"
          target="_blank">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f&amp;title="
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f&amp;title=Loading%20JSON%20files%20from%20several%20folders"
          target="_blank">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=&amp;body=https%3a%2f%2firfreitas.github.io%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f">
+         href="mailto:?subject=Loading%20JSON%20files%20from%20several%20folders&amp;body=%2fpost%2f2017-03-03-loading-json-files-from-several-folders%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -220,13 +220,7 @@
 </div>
 
     <div class="article-style" itemprop="articleBody">
-      <p>&ndash;
-title: &ldquo;Loading JSON files from several folders&rdquo;
-author: &ldquo;Isaac Freitas&rdquo;</p>
-
-<h2 id="date-2017-03-03t21-07-54-06-00">date: &ldquo;2017-03-03T21:07:54-06:00&rdquo;</h2>
-
-<p>For my dissertation research, I used the <a href="https://github.com/DocNow/twarc" target="_blank">twarc</a> command line and python package to collect tweets related to the flooding in Louisiana during August of 2016.  A useful utility which comes with this project is twarc-archive.py which allows passing keywords in which are then used to download all tweets (within the API limits) which mention those words.  Each time twarc-archive.py is run, it keeps a running log file of the progress and status of tweets being collected and creates a new .json file.
+      <p>For my dissertation research, I used the <a href="https://github.com/DocNow/twarc" target="_blank">twarc</a> command line and python package to collect tweets related to the flooding in Louisiana during August of 2016.  A useful utility which comes with this project is twarc-archive.py which allows passing keywords in which are then used to download all tweets (within the API limits) which mention those words.  Each time twarc-archive.py is run, it keeps a running log file of the progress and status of tweets being collected and creates a new .json file.
 </p>
 
 <p>For my data collection, I ran the program every day for four months for several different searches.  This resulted in multiple folders (one for every search) and dozens of json files in each folder.  Long story short, to do any further analysis I had to learn how to load all that json data into a usable format.  I found inspiration from a few stackoverflow posts such as <a href="http://stackoverflow.com/questions/38511163/parsing-multiple-json-files" target="_blank">this</a> and <a href="http://stackoverflow.com/questions/21533894/how-to-read-line-delimited-json-from-large-file-line-by-line" target="_blank">this</a> and <a href="http://stackoverflow.com/questions/1744989/read-from-file-or-stdin" target="_blank">this</a>, but ended up making an amalgamation with the best parts of each.</p>
@@ -234,45 +228,37 @@ author: &ldquo;Isaac Freitas&rdquo;</p>
 <p>The three pip-installable packages that I used are <strong>glob</strong>, <strong>json</strong>, and <strong>fileinput</strong>. Another utility from within the twarc is the <strong>json2csv.py</strong> file.  <strong>Glob</strong> enables reading in both lists of folders along a path as well as lists of folders meeting certain criteria.  The <strong>json</strong> package allows load and dumping of json data, and <strong>fileinput</strong> is useful for reading in data from a file or from command line arguments.   The json2csv utility in twarc has functions to allow easily reading in the twitter API json results into a list of lists in addition to outputting csv files.</p>
 
 <p>To get started, we import the packages and setup a path to where our folders are.</p>
-
-<pre><code class="language-python">import glob
-import json
-import fileinput
-import /path/to/twarc/utils/json2csv.py as j2c
-
-path = &quot;/path/to/folders/&quot;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span><span style=""> </span><span style="">glob</span><span style="">
+</span><span style=""></span><span style="color:#f92672">import</span><span style=""> </span><span style="">json</span><span style="">
+</span><span style=""></span><span style="color:#f92672">import</span><span style=""> </span><span style="">fileinput</span><span style="">
+</span><span style=""></span><span style="color:#f92672">import</span><span style=""> </span><span style="color:#f92672">/</span><span style="">path</span><span style="color:#f92672">/</span><span style="">to</span><span style="color:#f92672">/</span><span style="">twarc</span><span style="color:#f92672">/</span><span style="">utils</span><span style="color:#f92672">/</span><span style="">json2csv</span><span style="color:#f92672">.</span><span style="">py</span><span style=""> </span><span style="color:#66d9ef">as</span><span style=""> </span><span style="">j2c</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="">path</span><span style=""> </span><span style="color:#f92672">=</span><span style=""> </span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;/path/to/folders/&#34;</span></code></pre>
+</div>
 <p>To create a list of the folders along my path, you can pass your path into glob.glob() with a list comprehension and store the results in the jsonfolders variable.  To get all of the json files within all of the folders, you can either do a double for loop or you can combine two list comprehensions to iterate through the folders and glob up all the files.  This gives a final list of every json file.</p>
-
-<pre><code class="language-python">jsonfolders = [x for x in glob.glob(jfolder + &quot;/*&quot;)]
-alljsonfiles = [y for x in range(len(jsonfolders))
-                for y in glob.glob(jsonfolders[x] + &quot;/*.json&quot;)]
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">jsonfolders</span><span style=""> </span><span style="color:#f92672">=</span><span style=""> </span><span style="">[</span><span style="">x</span><span style=""> </span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">x</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">glob</span><span style="color:#f92672">.</span><span style="">glob</span><span style="">(</span><span style="">jfolder</span><span style=""> </span><span style="color:#f92672">+</span><span style=""> </span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;/*&#34;</span><span style="">)]</span><span style="">
+</span><span style=""></span><span style="">alljsonfiles</span><span style=""> </span><span style="color:#f92672">=</span><span style=""> </span><span style="">[</span><span style="">y</span><span style=""> </span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">x</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">range</span><span style="">(</span><span style="">len</span><span style="">(</span><span style="">jsonfolders</span><span style="">))</span><span style="">
+</span><span style="">                </span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">y</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">glob</span><span style="color:#f92672">.</span><span style="">glob</span><span style="">(</span><span style="">jsonfolders</span><span style="">[</span><span style="">x</span><span style="">]</span><span style=""> </span><span style="color:#f92672">+</span><span style=""> </span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;/*.json&#34;</span><span style="">)]</span></code></pre>
+</div>
 <p>Once you have the list of json files, you can then iterate to read over each json file.  Twarc outputs line-delimited json so you want to read in each line as a json object.  The <strong>fileinput.input(file)</strong> allows running a for loop over each line to read in the line-delimited json. Finally, we use the <strong>get_row()</strong> function from the json2csv package to flatten the data to create a list of lists in our variable <strong>empty_lst</strong>.</p>
-
-<pre><code class="language-python">empty_lst = []
-for file in alljsonfiles:
-    for line in fileinput.input(file):
-        tweet = json.loads(line)
-        empty_lst.append(j2c.get_row(tweet))
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">empty_lst</span><span style=""> </span><span style="color:#f92672">=</span><span style=""> </span><span style="">[]</span><span style="">
+</span><span style=""></span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">file</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">alljsonfiles</span><span style="">:</span><span style="">
+</span><span style="">    </span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">line</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">fileinput</span><span style="color:#f92672">.</span><span style="">input</span><span style="">(</span><span style="">file</span><span style="">):</span><span style="">
+</span><span style="">        </span><span style="">tweet</span><span style=""> </span><span style="color:#f92672">=</span><span style=""> </span><span style="">json</span><span style="color:#f92672">.</span><span style="">loads</span><span style="">(</span><span style="">line</span><span style="">)</span><span style="">
+</span><span style="">        </span><span style="">empty_lst</span><span style="color:#f92672">.</span><span style="">append</span><span style="">(</span><span style="">j2c</span><span style="color:#f92672">.</span><span style="">get_row</span><span style="">(</span><span style="">tweet</span><span style="">))</span></code></pre>
+</div>
 <p>And to wrap everything up, I tied everything together into a function for reading every line of every json file in every folder. The resulting list of lists can be turned into a <strong>pandas</strong> dataframe easily for further analysis or written to csv for simple storage.  With this function, I was able to load about eight hundred thousand tweets in a relatively short time.  I hope this walkthrough will be useful for others!</p>
-
-<pre><code class="language-python">def read_json_data(jfolder):
-    empty_lst = []
-    jsonfolders = [x for x in glob.glob(jfolder + &quot;/*&quot;)]
-    alljsonfiles = [y for x in range(len(jsonfolders))
-                    for y in glob.glob(jsonfolders[x] + &quot;/*.json&quot;)]
-    for file in alljsonfiles:
-        for line in fileinput.input(file):
-            tweet = json.loads(line)
-            empty_lst.append(j2c.get_row(tweet))
-    return empty_lst
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span><span style=""> </span><span style="color:#a6e22e">read_json_data</span><span style="">(</span><span style="">jfolder</span><span style="">):</span><span style="">
+</span><span style="">    </span><span style="">empty_lst</span><span style=""> </span><span style="color:#f92672">=</span><span style=""> </span><span style="">[]</span><span style="">
+</span><span style="">    </span><span style="">jsonfolders</span><span style=""> </span><span style="color:#f92672">=</span><span style=""> </span><span style="">[</span><span style="">x</span><span style=""> </span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">x</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">glob</span><span style="color:#f92672">.</span><span style="">glob</span><span style="">(</span><span style="">jfolder</span><span style=""> </span><span style="color:#f92672">+</span><span style=""> </span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;/*&#34;</span><span style="">)]</span><span style="">
+</span><span style="">    </span><span style="">alljsonfiles</span><span style=""> </span><span style="color:#f92672">=</span><span style=""> </span><span style="">[</span><span style="">y</span><span style=""> </span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">x</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">range</span><span style="">(</span><span style="">len</span><span style="">(</span><span style="">jsonfolders</span><span style="">))</span><span style="">
+</span><span style="">                    </span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">y</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">glob</span><span style="color:#f92672">.</span><span style="">glob</span><span style="">(</span><span style="">jsonfolders</span><span style="">[</span><span style="">x</span><span style="">]</span><span style=""> </span><span style="color:#f92672">+</span><span style=""> </span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;/*.json&#34;</span><span style="">)]</span><span style="">
+</span><span style="">    </span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">file</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">alljsonfiles</span><span style="">:</span><span style="">
+</span><span style="">        </span><span style="color:#66d9ef">for</span><span style=""> </span><span style="">line</span><span style=""> </span><span style="color:#f92672">in</span><span style=""> </span><span style="">fileinput</span><span style="color:#f92672">.</span><span style="">input</span><span style="">(</span><span style="">file</span><span style="">):</span><span style="">
+</span><span style="">            </span><span style="">tweet</span><span style=""> </span><span style="color:#f92672">=</span><span style=""> </span><span style="">json</span><span style="color:#f92672">.</span><span style="">loads</span><span style="">(</span><span style="">line</span><span style="">)</span><span style="">
+</span><span style="">            </span><span style="">empty_lst</span><span style="color:#f92672">.</span><span style="">append</span><span style="">(</span><span style="">j2c</span><span style="color:#f92672">.</span><span style="">get_row</span><span style="">(</span><span style="">tweet</span><span style="">))</span><span style="">
+</span><span style="">    </span><span style="color:#66d9ef">return</span><span style=""> </span><span style="">empty_lst</span></code></pre>
+</div>
 <p>If you like the walkthrough, send me a tweet about it.  See the links at the bottom of the page.</p>
     </div>
   </div>
@@ -286,10 +272,10 @@ for file in alljsonfiles:
   <nav>
   <ul class="pager">
     
-
+    <li class="previous"><a href="/post/2017-03-03-foundations/"><span
+      aria-hidden="true">&larr;</span> Foundations</a></li>
     
-    <li class="next"><a href="https://irfreitas.github.io/post/2017-03-03-foundations/">Foundations <span
-      aria-hidden="true">&rarr;</span></a></li>
+
     
   </ul>
 </nav>

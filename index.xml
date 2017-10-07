@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Isaac Freitas on Isaac Freitas</title>
-    <link>https://irfreitas.github.io/</link>
+    <link>/</link>
     <description>Recent content in Isaac Freitas on Isaac Freitas</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,38 +11,77 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Topic Modeling</title>
-      <link>https://irfreitas.github.io/post/topic-modeling/</link>
-      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://irfreitas.github.io/post/topic-modeling/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Tweet Relief: How Voluntary Organizations Active in Disaster Communicate about Disaster Relief on Twitter</title>
-      <link>https://irfreitas.github.io/talk/media-preconf-2017/</link>
+      <link>/talk/media-preconf-2017/</link>
       <pubDate>Fri, 11 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://irfreitas.github.io/talk/media-preconf-2017/</guid>
+      <guid>/talk/media-preconf-2017/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Permeable Participation: Civic Engagement and Protest Mobilization in 20 OECD Countries, 1981–2008</title>
-      <link>https://irfreitas.github.io/publication/permeable-participation/</link>
+      <link>/publication/permeable-participation/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://irfreitas.github.io/publication/permeable-participation/</guid>
+      <guid>/publication/permeable-participation/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Loading JSON files from several folders</title>
+      <link>/post/2017-03-03-loading-json-files-from-several-folders/</link>
+      <pubDate>Fri, 03 Mar 2017 21:07:54 -0600</pubDate>
+      
+      <guid>/post/2017-03-03-loading-json-files-from-several-folders/</guid>
+      <description>&lt;p&gt;For my dissertation research, I used the &lt;a href=&#34;https://github.com/DocNow/twarc&#34; target=&#34;_blank&#34;&gt;twarc&lt;/a&gt; command line and python package to collect tweets related to the flooding in Louisiana during August of 2016.  A useful utility which comes with this project is twarc-archive.py which allows passing keywords in which are then used to download all tweets (within the API limits) which mention those words.  Each time twarc-archive.py is run, it keeps a running log file of the progress and status of tweets being collected and creates a new .json file.
+&lt;/p&gt;
+
+&lt;p&gt;For my data collection, I ran the program every day for four months for several different searches.  This resulted in multiple folders (one for every search) and dozens of json files in each folder.  Long story short, to do any further analysis I had to learn how to load all that json data into a usable format.  I found inspiration from a few stackoverflow posts such as &lt;a href=&#34;http://stackoverflow.com/questions/38511163/parsing-multiple-json-files&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; and &lt;a href=&#34;http://stackoverflow.com/questions/21533894/how-to-read-line-delimited-json-from-large-file-line-by-line&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; and &lt;a href=&#34;http://stackoverflow.com/questions/1744989/read-from-file-or-stdin&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt;, but ended up making an amalgamation with the best parts of each.&lt;/p&gt;
+
+&lt;p&gt;The three pip-installable packages that I used are &lt;strong&gt;glob&lt;/strong&gt;, &lt;strong&gt;json&lt;/strong&gt;, and &lt;strong&gt;fileinput&lt;/strong&gt;. Another utility from within the twarc is the &lt;strong&gt;json2csv.py&lt;/strong&gt; file.  &lt;strong&gt;Glob&lt;/strong&gt; enables reading in both lists of folders along a path as well as lists of folders meeting certain criteria.  The &lt;strong&gt;json&lt;/strong&gt; package allows load and dumping of json data, and &lt;strong&gt;fileinput&lt;/strong&gt; is useful for reading in data from a file or from command line arguments.   The json2csv utility in twarc has functions to allow easily reading in the twitter API json results into a list of lists in addition to outputting csv files.&lt;/p&gt;
+
+&lt;p&gt;To get started, we import the packages and setup a path to where our folders are.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;glob&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;json&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;fileinput&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;&#34;&gt;to&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;&#34;&gt;twarc&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;&#34;&gt;utils&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;&#34;&gt;json2csv&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;py&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;j2c&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/path/to/folders/&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;To create a list of the folders along my path, you can pass your path into glob.glob() with a list comprehension and store the results in the jsonfolders variable.  To get all of the json files within all of the folders, you can either do a double for loop or you can combine two list comprehensions to iterate through the folders and glob up all the files.  This gives a final list of every json file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;&#34;&gt;jsonfolders&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;glob&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;glob&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;jfolder&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/*&amp;#34;&lt;/span&gt;&lt;span style=&#34;&#34;&gt;)]&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;&#34;&gt;alljsonfiles&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;range&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;len&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;jsonfolders&lt;/span&gt;&lt;span style=&#34;&#34;&gt;))&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;                &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;glob&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;glob&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;jsonfolders&lt;/span&gt;&lt;span style=&#34;&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/*.json&amp;#34;&lt;/span&gt;&lt;span style=&#34;&#34;&gt;)]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Once you have the list of json files, you can then iterate to read over each json file.  Twarc outputs line-delimited json so you want to read in each line as a json object.  The &lt;strong&gt;fileinput.input(file)&lt;/strong&gt; allows running a for loop over each line to read in the line-delimited json. Finally, we use the &lt;strong&gt;get_row()&lt;/strong&gt; function from the json2csv package to flatten the data to create a list of lists in our variable &lt;strong&gt;empty_lst&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;&#34;&gt;empty_lst&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;[]&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;file&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;alljsonfiles&lt;/span&gt;&lt;span style=&#34;&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;line&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;fileinput&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;input&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;file&lt;/span&gt;&lt;span style=&#34;&#34;&gt;):&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;&#34;&gt;tweet&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;json&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;loads&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;line&lt;/span&gt;&lt;span style=&#34;&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;&#34;&gt;empty_lst&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;append&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;j2c&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;get_row&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;tweet&lt;/span&gt;&lt;span style=&#34;&#34;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;And to wrap everything up, I tied everything together into a function for reading every line of every json file in every folder. The resulting list of lists can be turned into a &lt;strong&gt;pandas&lt;/strong&gt; dataframe easily for further analysis or written to csv for simple storage.  With this function, I was able to load about eight hundred thousand tweets in a relatively short time.  I hope this walkthrough will be useful for others!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;read_json_data&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;jfolder&lt;/span&gt;&lt;span style=&#34;&#34;&gt;):&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;&#34;&gt;empty_lst&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;[]&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;&#34;&gt;jsonfolders&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;glob&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;glob&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;jfolder&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/*&amp;#34;&lt;/span&gt;&lt;span style=&#34;&#34;&gt;)]&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;&#34;&gt;alljsonfiles&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;range&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;len&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;jsonfolders&lt;/span&gt;&lt;span style=&#34;&#34;&gt;))&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;glob&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;glob&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;jsonfolders&lt;/span&gt;&lt;span style=&#34;&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/*.json&amp;#34;&lt;/span&gt;&lt;span style=&#34;&#34;&gt;)]&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;file&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;alljsonfiles&lt;/span&gt;&lt;span style=&#34;&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;line&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;fileinput&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;input&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;file&lt;/span&gt;&lt;span style=&#34;&#34;&gt;):&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;&#34;&gt;tweet&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;json&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;loads&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;line&lt;/span&gt;&lt;span style=&#34;&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;&#34;&gt;empty_lst&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;append&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;j2c&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;&#34;&gt;get_row&lt;/span&gt;&lt;span style=&#34;&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;&#34;&gt;tweet&lt;/span&gt;&lt;span style=&#34;&#34;&gt;))&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;&lt;span style=&#34;&#34;&gt; &lt;/span&gt;&lt;span style=&#34;&#34;&gt;empty_lst&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;If you like the walkthrough, send me a tweet about it.  See the links at the bottom of the page.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Foundations</title>
-      <link>https://irfreitas.github.io/post/2017-03-03-foundations/</link>
+      <link>/post/2017-03-03-foundations/</link>
       <pubDate>Fri, 03 Mar 2017 19:52:49 -0600</pubDate>
       
-      <guid>https://irfreitas.github.io/post/2017-03-03-foundations/</guid>
+      <guid>/post/2017-03-03-foundations/</guid>
       <description>&lt;p&gt;Welcome to my blog. I hope to use this space to discuss social science research and to share what I learn about programming in R, Python, SQL, and other languages relevant to data science and computational social science methods.  I can&amp;rsquo;t promise any deep wisdom, but hopefully I offer snippets of useful knowledge as I go along.&lt;/p&gt;
 
 &lt;p&gt;Cheers,
@@ -52,74 +91,12 @@ Isaac&lt;/p&gt;
     
     <item>
       <title>About</title>
-      <link>https://irfreitas.github.io/about/</link>
+      <link>/about/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
-      <guid>https://irfreitas.github.io/about/</guid>
+      <guid>/about/</guid>
       <description>&lt;p&gt;Welcome to the website of Isaac Freitas.  Please contact me as necessary.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://irfreitas.github.io/post/2017-03-03-loading-json-files-from-several-folders/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://irfreitas.github.io/post/2017-03-03-loading-json-files-from-several-folders/</guid>
-      <description>&lt;p&gt;&amp;ndash;
-title: &amp;ldquo;Loading JSON files from several folders&amp;rdquo;
-author: &amp;ldquo;Isaac Freitas&amp;rdquo;&lt;/p&gt;
-
-&lt;h2 id=&#34;date-2017-03-03t21-07-54-06-00&#34;&gt;date: &amp;ldquo;2017-03-03T21:07:54-06:00&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;For my dissertation research, I used the &lt;a href=&#34;https://github.com/DocNow/twarc&#34; target=&#34;_blank&#34;&gt;twarc&lt;/a&gt; command line and python package to collect tweets related to the flooding in Louisiana during August of 2016.  A useful utility which comes with this project is twarc-archive.py which allows passing keywords in which are then used to download all tweets (within the API limits) which mention those words.  Each time twarc-archive.py is run, it keeps a running log file of the progress and status of tweets being collected and creates a new .json file.
-&lt;/p&gt;
-
-&lt;p&gt;For my data collection, I ran the program every day for four months for several different searches.  This resulted in multiple folders (one for every search) and dozens of json files in each folder.  Long story short, to do any further analysis I had to learn how to load all that json data into a usable format.  I found inspiration from a few stackoverflow posts such as &lt;a href=&#34;http://stackoverflow.com/questions/38511163/parsing-multiple-json-files&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; and &lt;a href=&#34;http://stackoverflow.com/questions/21533894/how-to-read-line-delimited-json-from-large-file-line-by-line&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; and &lt;a href=&#34;http://stackoverflow.com/questions/1744989/read-from-file-or-stdin&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt;, but ended up making an amalgamation with the best parts of each.&lt;/p&gt;
-
-&lt;p&gt;The three pip-installable packages that I used are &lt;strong&gt;glob&lt;/strong&gt;, &lt;strong&gt;json&lt;/strong&gt;, and &lt;strong&gt;fileinput&lt;/strong&gt;. Another utility from within the twarc is the &lt;strong&gt;json2csv.py&lt;/strong&gt; file.  &lt;strong&gt;Glob&lt;/strong&gt; enables reading in both lists of folders along a path as well as lists of folders meeting certain criteria.  The &lt;strong&gt;json&lt;/strong&gt; package allows load and dumping of json data, and &lt;strong&gt;fileinput&lt;/strong&gt; is useful for reading in data from a file or from command line arguments.   The json2csv utility in twarc has functions to allow easily reading in the twitter API json results into a list of lists in addition to outputting csv files.&lt;/p&gt;
-
-&lt;p&gt;To get started, we import the packages and setup a path to where our folders are.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import glob
-import json
-import fileinput
-import /path/to/twarc/utils/json2csv.py as j2c
-
-path = &amp;quot;/path/to/folders/&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To create a list of the folders along my path, you can pass your path into glob.glob() with a list comprehension and store the results in the jsonfolders variable.  To get all of the json files within all of the folders, you can either do a double for loop or you can combine two list comprehensions to iterate through the folders and glob up all the files.  This gives a final list of every json file.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;jsonfolders = [x for x in glob.glob(jfolder + &amp;quot;/*&amp;quot;)]
-alljsonfiles = [y for x in range(len(jsonfolders))
-                for y in glob.glob(jsonfolders[x] + &amp;quot;/*.json&amp;quot;)]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Once you have the list of json files, you can then iterate to read over each json file.  Twarc outputs line-delimited json so you want to read in each line as a json object.  The &lt;strong&gt;fileinput.input(file)&lt;/strong&gt; allows running a for loop over each line to read in the line-delimited json. Finally, we use the &lt;strong&gt;get_row()&lt;/strong&gt; function from the json2csv package to flatten the data to create a list of lists in our variable &lt;strong&gt;empty_lst&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;empty_lst = []
-for file in alljsonfiles:
-    for line in fileinput.input(file):
-        tweet = json.loads(line)
-        empty_lst.append(j2c.get_row(tweet))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And to wrap everything up, I tied everything together into a function for reading every line of every json file in every folder. The resulting list of lists can be turned into a &lt;strong&gt;pandas&lt;/strong&gt; dataframe easily for further analysis or written to csv for simple storage.  With this function, I was able to load about eight hundred thousand tweets in a relatively short time.  I hope this walkthrough will be useful for others!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def read_json_data(jfolder):
-    empty_lst = []
-    jsonfolders = [x for x in glob.glob(jfolder + &amp;quot;/*&amp;quot;)]
-    alljsonfiles = [y for x in range(len(jsonfolders))
-                    for y in glob.glob(jsonfolders[x] + &amp;quot;/*.json&amp;quot;)]
-    for file in alljsonfiles:
-        for line in fileinput.input(file):
-            tweet = json.loads(line)
-            empty_lst.append(j2c.get_row(tweet))
-    return empty_lst
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you like the walkthrough, send me a tweet about it.  See the links at the bottom of the page.&lt;/p&gt;</description>
     </item>
     
   </channel>

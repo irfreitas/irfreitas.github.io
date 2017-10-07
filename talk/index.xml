@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Recent &amp; Upcoming Talks on Isaac Freitas</title>
-    <link>https://irfreitas.github.io/talk/</link>
+    <link>/talk/</link>
     <description>Recent content in Recent &amp; Upcoming Talks on Isaac Freitas</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Tweet Relief: How Voluntary Organizations Active in Disaster Communicate about Disaster Relief on Twitter</title>
-      <link>https://irfreitas.github.io/talk/media-preconf-2017/</link>
+      <link>/talk/media-preconf-2017/</link>
       <pubDate>Fri, 11 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://irfreitas.github.io/talk/media-preconf-2017/</guid>
+      <guid>/talk/media-preconf-2017/</guid>
       <description></description>
     </item>
     
