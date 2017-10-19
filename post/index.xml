@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Isaac Freitas</title>
-    <link>/post/</link>
+    <link>https://irfreitas.github.io/post/</link>
     <description>Recent content in Posts on Isaac Freitas</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Loading JSON files from several folders</title>
-      <link>/post/2017-03-03-loading-json-files-from-several-folders/</link>
+      <link>https://irfreitas.github.io/post/2017-03-03-loading-json-files-from-several-folders/</link>
       <pubDate>Fri, 03 Mar 2017 21:07:54 -0600</pubDate>
       
-      <guid>/post/2017-03-03-loading-json-files-from-several-folders/</guid>
+      <guid>https://irfreitas.github.io/post/2017-03-03-loading-json-files-from-several-folders/</guid>
       <description>&lt;p&gt;For my dissertation research, I used the &lt;a href=&#34;https://github.com/DocNow/twarc&#34; target=&#34;_blank&#34;&gt;twarc&lt;/a&gt; command line and python package to collect tweets related to the flooding in Louisiana during August of 2016.  A useful utility which comes with this project is twarc-archive.py which allows passing keywords in which are then used to download all tweets (within the API limits) which mention those words.  Each time twarc-archive.py is run, it keeps a running log file of the progress and status of tweets being collected and creates a new .json file.
 &lt;/p&gt;
 
@@ -60,10 +60,10 @@
     
     <item>
       <title>Foundations</title>
-      <link>/post/2017-03-03-foundations/</link>
+      <link>https://irfreitas.github.io/post/2017-03-03-foundations/</link>
       <pubDate>Fri, 03 Mar 2017 19:52:49 -0600</pubDate>
       
-      <guid>/post/2017-03-03-foundations/</guid>
+      <guid>https://irfreitas.github.io/post/2017-03-03-foundations/</guid>
       <description>&lt;p&gt;Welcome to my blog. I hope to use this space to discuss social science research and to share what I learn about programming in R, Python, SQL, and other languages relevant to data science and computational social science methods.  I can&amp;rsquo;t promise any deep wisdom, but hopefully I offer snippets of useful knowledge as I go along.&lt;/p&gt;
 
 &lt;p&gt;Cheers,
